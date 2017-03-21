@@ -1,17 +1,14 @@
 ########   Behavrioual result
-########   read file
+########   read file
+########   All graphs can be found in this project repository
 
 ########  rdata contains partcipants` behavioural result (reaction time and percent correct)
-
 library(readr)
-
 rdata <- read_csv("~/Documents/Psychology L4/Maxi/data/rdata.csv")
 View(rdata)
 
 ######   Scatterplot-Regression line
-
-######   Scatterplot of Reaction time by Task by Subject 
-
+######   scatterplot-RT-regressionline
 library(ggplot2)
 
 p=ggplot(rdata, aes(x = rt_gender, y = rt_exp))+
@@ -31,8 +28,7 @@ p1+scale_y_continuous(limits = c(400, 1300), breaks = seq(400, 1300, 200))+
         axis.text.x = element_text(angle = 1))
 
 
-######   Scatterplot of percent correct by Task by Subject 
-
+######   scatterplot-acc-regressionline 
 ggplot(rdata, aes(x = acc_gender, y = acc_exp))+
   geom_point(size=3, alpha=0.6, aes(color=Subject))+
   geom_smooth(aes(color=factor(Subject)), method = "lm", se = TRUE)+
@@ -52,7 +48,7 @@ ggplot(rdata, aes(x = acc_gender, y = acc_exp))+
 rdata1 <- read_csv("~/Documents/Psychology L4/Maxi/data/rdata1.csv")
 View(rdata1)
 
-#######   Task Accuracy Scatterplot with categorical x-axis (Basic plot/jitter,label)
+#######   scatterplot-acc (Basic plot/jitter,label)
 
 ggplot(rdata1, aes(x=rdata1$Task, y=acc,colour=Participants))+
   geom_point(size=3, alpha=0.5, position=position_jitter(w=0.2, h=0))+
@@ -65,7 +61,7 @@ ggplot(rdata1, aes(x=rdata1$Task, y=acc,colour=Participants))+
         axis.text.x = element_text(angle=1))
 
 
-######    Reaction Time Scatterplot with categorical x-axis (Basic plot/jitter,label)
+######    scatterplot-rt (Basic plot/jitter,label)
 
 ggplot(rdata1, aes(x=rdata1$Task, y=rt,colour=Participants))+
   geom_point(size=3, alpha=0.5, position=position_jitter(w=0.2, h=0))+
@@ -76,7 +72,7 @@ ggplot(rdata1, aes(x=rdata1$Task, y=rt,colour=Participants))+
         axis.text.x = element_text(angle = 1))
 
 
-#########  Perform an AVOVA for behavrioual data
+#########  Run an AVOVA for behavrioual data
 summarise(anova, mean(acc_py), mean(acc_po), mean(rt_py), mean(rt_po))
 ##calculate the rest 
 summary(rdata1)
@@ -127,7 +123,6 @@ gpo_mean <- read_csv("~/Documents/Psychology L4/Maxi/data/gpo_mean.csv")
 
 
 #### GPY
-
 library(ggplot2)
 ggplot(gpy,aes(Timepoint, MI, group=Subject)) +
   geom_line(size=0.6)+
@@ -143,7 +138,6 @@ ggplot(gpy,aes(Timepoint, MI, group=Subject)) +
         axis.text.x = element_text(hjust=1))
 
 #### EPY
-
 ggplot(epy,aes(Timepoint, MI, group=Subject)) +
   geom_line(size=0.6)+
   scale_y_continuous(breaks = seq(-1, 0.5, 0.02))+
@@ -158,7 +152,6 @@ ggplot(epy,aes(Timepoint, MI, group=Subject)) +
         axis.text.x = element_text(hjust=1))
 
 #### GPO
-
 ggplot(gpo,aes(Timepoint, MI, group=Subject)) +
   geom_line(size=0.6)+
   scale_y_continuous(breaks = seq(-1, 0.5, 0.02))+
@@ -173,7 +166,6 @@ ggplot(gpo,aes(Timepoint, MI, group=Subject)) +
         axis.text.x = element_text(hjust=1))
 
 #### EPO
-
 ggplot(epo,aes(Timepoint, MI, group=Subject)) +
   geom_line(size=0.6)+
   scale_y_continuous(breaks = seq(-1, 0.5, 0.02))+
@@ -199,14 +191,14 @@ library(reshape2)
 median = melt(median4, id.vars="Timepoint", value.name="MI", variable.name="MI_")
 mean = melt(mean4, id.vars="Timepoint", value.name="MI", variable.name="MI_")
 
-########## Median for each group each task
+########## Median-4groups
 ggplot(median,aes(Timepoint, MI, group=MI_, color=MI_)) +
   geom_line(size=0.6)+
   scale_y_continuous(breaks = seq(-1, 0.5, 0.006))+
   scale_x_continuous(breaks = seq(-300, 600, 100))+
   labs(title='Meadian Mutual Information by two groups two tasks', x='Timepoint',y='Mutual Information')
 
-########## Mean for each group each task
+########## Mean-4groups
 ggplot(mean,aes(Timepoint, MI, group=MI_, color=MI_)) +
   geom_line(size=0.6)+
   scale_y_continuous(breaks = seq(-1, 0.5, 0.006))+
@@ -252,8 +244,7 @@ library(readr)
 it <- read_csv("/Volumes/CZ Cgate/Maxidata/matlab_statshd.m/it.csv")
 View(it)
 
-######### creating graphs
-
+######### 50it
 library(ggplot2)
 ggplot(it, aes(x=Task, y=It,colour=Subject))+
   geom_point(size=3, alpha=0.5, position=position_jitter(w=0.2, h=0))+
