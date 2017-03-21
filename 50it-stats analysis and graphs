@@ -1,4 +1,3 @@
-%% Written by Guillaume Rousselet github site: https://github.com/GRousselet
 %% load data
 load gpmi
 % gpmi contains variables times, eo, ey, go, gy
